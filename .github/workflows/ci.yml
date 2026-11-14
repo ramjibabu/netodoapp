@@ -44,3 +44,22 @@ jobs:
           tags: |
             hasthor/todo-backend:latest
             hasthor/todo-backend:${{ github.sha }}
+
+  deploy-to-ec2:
+    name: Deploy to AWS EC2
+    needs: build-and-push
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/netodoapp
+            docker compose pull
+            docker compose up -d
+            docker image prune -f

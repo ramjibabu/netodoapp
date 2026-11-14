@@ -203,7 +203,7 @@ overLayDescription('')
 
   return (
     <div className="position-relative">
-      <div className='bg-success text-light p-3 text-center'><h1>Todo App</h1></div>
+      <div className='bg-success text-light p-3 text-center'><h1>RANmji App</h1></div>
 
       <div className='my-3 d-flex gap-3 container align-items-end'>
         <div className='w-50'>
